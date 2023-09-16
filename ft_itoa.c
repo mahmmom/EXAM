@@ -2,19 +2,19 @@
 
 static int	num_digit(long num)
 {
-	int	digit;
+	int	digits;
 
-	digit = 0;
+	digits = 0;
 	if (num == 0)
 		return (1);
 	if (num < 0)
-		digit++;
+		digits++;
 	while (num != 0)
 	{
 		num = num / 10;
-		digit++;
+		digits++;
 	}
-	return (cur);
+	return (digits);
 }
 
 char	*ft_itoa(int n)
