@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void ft_gdf(int num, int reminder)
+{
+    int num_temp;
+    int rem_temp;
+
+    if ( reminder == 0)
+        printf("%d\n", num);
+    else
+    {
+        num_temp = reminder;
+        rem_temp = num % reminder;
+        ft_gdf(num_temp, rem_temp);
+    }
+}
+
+int main (int ac, char **av)
+{
+    if (ac == 3)
+    {
+        int reminder;
+        int num1 = atoi(av[1]);
+        int num2 = atoi(av[2]);
+        
+        if (num1 > num2)
+        {
+            reminder = num1 % num2;
+            ft_gdf(num2, reminder);
+        }
+        else if (num2 > num1)
+        {
+            reminder = num2 % num1;
+            ft_gdf(num1, reminder);
+        }
+    }
+    else
+        printf("\n");
+}
