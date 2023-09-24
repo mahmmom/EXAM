@@ -1,0 +1,3 @@
+https://www.codingame.com/playgrounds/2358/how-to-plot-the-mandelbrot-set/mandelbrot-set
+https://complex-analysis.com/content/mandelbrot_set.html
+https://complex-analysis.com/content/julia_set.html
