@@ -7,12 +7,37 @@
 #define HEIGHT 800
 #define MAX_ITER 1000
 
-int mandelbrot(double x, double y) {
+#define JULIA_REAL -0.7
+#define JULIA_IMAG 0.27015
+
+int julia(double x, double y)
+{
     int i = 0;
     double real = x;
     double imag = y;
 
-    while (i < MAX_ITER) {
+    while (i < MAX_ITER)
+    {
+        double real2 = real * real;
+        double imag2 = imag * imag;
+        if (real2 + imag2 > 4.0)
+            break;
+        imag = 2 * real * imag + JULIA_IMAG;
+        real = real2 - imag2 + JULIA_REAL;
+        i++;
+    }
+
+    return (i);
+}
+
+int mandelbrot(double x, double y)
+{
+    int i = 0;
+    double real = x;
+    double imag = y;
+
+    while (i < MAX_ITER)
+    {
         double real2 = real * real;
         double imag2 = imag * imag;
         if (real2 + imag2 > 4.0)
@@ -22,10 +47,11 @@ int mandelbrot(double x, double y) {
         i++;
     }
 
-    return MAX_ITER;
+    return (MAX_ITER);
 }
 
-int main() {
+int main()
+{
     void *mlx;
     void *win;
     int x = 0;
@@ -34,9 +60,11 @@ int main() {
     mlx = mlx_init();
     win = mlx_new_window(mlx, WIDTH, HEIGHT, "Mandelbrot Fractal");
 
-    while (y < HEIGHT) {
+    while (y < HEIGHT)
+    {
         x = 0;
-        while (x < WIDTH) {
+        while (x < WIDTH)
+        {
             double real = (x - WIDTH / 2.0) * 4.0 / WIDTH;
             double imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
             int color = mandelbrot(real, imag);
@@ -45,7 +73,7 @@ int main() {
         }
         y++;
     }
-
+    
     mlx_loop(mlx);
-    return 0;
+    return (0);
 }
