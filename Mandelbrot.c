@@ -16,13 +16,13 @@ int mandelbrot(double x, double y) {
         double real2 = real * real;
         double imag2 = imag * imag;
         if (real2 + imag2 > 4.0)
-            break;
+            return i;
         imag = 2 * real * imag + y;
         real = real2 - imag2 + x;
         i++;
     }
 
-    return i;
+    return MAX_ITER;
 }
 
 int main() {
@@ -34,16 +34,16 @@ int main() {
     mlx = mlx_init();
     win = mlx_new_window(mlx, WIDTH, HEIGHT, "Mandelbrot Fractal");
 
-    while (x < WIDTH) {
-        y = 0;
-        while (y < HEIGHT) {
+    while (y < HEIGHT) {
+        x = 0;
+        while (x < WIDTH) {
             double real = (x - WIDTH / 2.0) * 4.0 / WIDTH;
             double imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
             int color = mandelbrot(real, imag);
-            mlx_pixel_put(mlx, win, x, y, color);
-            y++;
+            mlx_pixel_put(mlx, win, x, y, color * 0x00010101); // Color mapping
+            x++;
         }
-        x++;
+        y++;
     }
 
     mlx_loop(mlx);
