@@ -10,12 +10,12 @@ struct s_list
 	t_list  *next;
 };
 
-void ft_swap(int *c, int *d) // swap funtion used to swap the data of c and d.
+void ft_swap(int *a, int *b) // swap funtion used to swap the data of c and d.
 {
 	int temp;
-	temp = *c;
-	*c = *d;
-	*d = temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
