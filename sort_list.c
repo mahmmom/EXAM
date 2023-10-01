@@ -10,33 +10,30 @@ struct s_list
 	t_list  *next;
 };
 
-void	swap_values(t_list *a, t_list *b)
+void ft_swap(int *c, int *d) // swap funtion used to swap the data of c and d.
 {
-	int swap = a->data;
-	a->data = b->data;
-	b->data = swap;
+	int temp;
+	temp = *c;
+	*c = *d;
+	*d = temp;
 }
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	int swapped = 1;
-	t_list *cur = lst;
-
-	while (swapped == 1)
+	t_list *begin = lst; // pointer used to point head of the list.
+	t_list *future; // pointer used for seconding while loop which will make the bubble (largest element) at the last of the list.
+	while(lst)
 	{
-		swapped = 0;
-		while (cur != 0 && cur->next != 0)
+		future = lst->next;
+		while (future)
 		{
-			if (cmp(cur->data, cur->next->data) == 0)
-			{
-				swap_values(cur, cur->next);
-				swapped = 1;
-			}
-			cur = cur->next;
+			if (!cmp(lst->data, future->data))
+				ft_swap(&lst->data, &future->data);
+			future = future->next;
 		}
-		cur = lst;
+		lst = lst->next;
 	}
-	return (lst);
+	return (begin);
 }
 
 int		ascending(int a, int b)
