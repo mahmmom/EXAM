@@ -10,36 +10,33 @@ struct s_list
 	t_list  *next;
 };
 
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+void	swap_values(t_list *a, t_list *b)
 {
-	int		overflow;
-	t_list	*tmp;
-
-	tmp = lst;
-	while (lst->next != NULL)
-	{
-		if (((*cmp)(lst->data, lst->next->data)) == 0)
-		{
-			overflow = lst->data;
-			lst->data = lst->next->data;
-			lst->next->data = overflow;
-			lst = tmp;
-		}
-		else
-			lst = lst->next;
-	}
-	lst = tmp;
-	return (lst);
+	int swap = a->data;
+	a->data = b->data;
+	b->data = swap;
 }
 
-t_list	*add_int(t_list *list, int nb)
+t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	t_list *new;
+	int swapped = 1;
+	t_list *cur = lst;
 
-	new = (t_list*)malloc(sizeof(t_list));
-	new->data = nb;
-	new->next = list;
-	return (new);
+	while (swapped == 1)
+	{
+		swapped = 0;
+		while (cur != 0 && cur->next != 0)
+		{
+			if (cmp(cur->data, cur->next->data) == 0)
+			{
+				swap_values(cur, cur->next);
+				swapped = 1;
+			}
+			cur = cur->next;
+		}
+		cur = lst;
+	}
+	return (lst);
 }
 
 int		ascending(int a, int b)
