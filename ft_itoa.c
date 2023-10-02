@@ -1,47 +1,34 @@
 #include <stdlib.h>
 
-static int	num_digit(long num)
+char	*ft_itoa(int nbr)
 {
-	int	digits;
+	int	i = 0;
+	char	*str;
+	int	temp = nbr;
 
-	digits = 0;
-	if (num == 0)
-		return (1);
-	if (num < 0)
-		digits++;
-	while (num != 0)
-	{
-		num = num / 10;
-		digits++;
-	}
-	return (digits);
-}
-
-char	*ft_itoa(int n)
-{
-	long	len;
-	long	num;
-	char	*result;
-
-	len = num_digit(n);
-	num = n;
-	if (n < 0)
-		num *= -1;
-	result = malloc(sizeof(char) * (len + 1));
-	if (!result)
+	if (nbr == -2147483648)
+		return ("-2147483648");
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
 		return (NULL);
-	result[len] = 0;
-	if (num == 0)
-		result[0] = '0';
-	else
+	str[i] = '\0';
+	if (nbr == 0)
+		return ("0");
+	if (nbr < 0)
 	{
-		while (len--, num != 0)
-		{
-			result[len] = (num % 10) + '0';
-			num = (num - (num % 10)) / 10;
-		}
-		if (n < 0)
-			result[len] = '-';
+		i++;
+		nbr *= -1;
+		str[0] = '-';
 	}
-	return (result);
+	while (temp)
+	{
+		temp /= 10;
+		i++;
+	}
+	while (nbr)
+	{
+		str[--i] = nbr % 10 + '0';
+		nbr /= 10;
+	}
+	return (str);
 }
